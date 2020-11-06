@@ -8,7 +8,6 @@ HEADERS = {'accept': '*/*',
 URL = 'https://vc.ru/'
 SITEMAP = 'https://vc.ru/sitemap/standard.xml'
 
-SITEMAP
 # run process crawling requests - data base is sitemap.xml PoolCrawl(URL, n=7)
 def behavior(request):
     url = CountModel(request)
