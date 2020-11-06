@@ -1,7 +1,7 @@
 from multiprocessing import Pool
 import requests
 import bs4
-from run import behavior, HEADERS, SITEMAP, URL
+from run import behavior, HEADERS
 
 
 class CrawlRun(object):
@@ -18,23 +18,22 @@ class CrawlRun(object):
                 return list_urls_s
             else:
                 return behavior(self.url)
+        except Exception as e:
+            return e
 
-        finally:
-            try:
-                with open(self.url, 'r') as f:
-                    soup = bs4.BeautifulSoup(f, 'html.process_crawl')
-                    list_urls_s = [i.get_text() for i in soup.find_all('loc')]
-                    return list_urls_s
-            except Exception as e:
-                if e == 'Errno 22':
-                    print(e)
-                    pass
+        try:
+            with open(self.url, 'r') as f:
+                soup = bs4.BeautifulSoup(f, 'html.process_crawl')
+                list_urls_s = [i.get_text() for i in soup.find_all('loc')]
+                return list_urls_s
+        except Exception as e:
+            return e
 
 
-def PoolCrawl(object_pars,n=5):
+def PoolCrawl(object_pars, n=5):
     try:
         M = CrawlRun(object_pars)
         pool = Pool(n)
         pool.map(behavior, M.data())
-    except:
-        pass
+    except Exception as e:
+        return e
