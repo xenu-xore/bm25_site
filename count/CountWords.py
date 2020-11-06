@@ -7,7 +7,7 @@ class CountModel:
     def __init__(self, url):
         self.url = url
 
-    def get_the_corpus(self, model, query):
+    def get_the_corpus(self, model, query=0):
         # Получаем корпус всех слов
         corpus = PageText(model)
         good_corpus = corpus.writeFile(self.url)
@@ -18,12 +18,10 @@ class CountModel:
         tokenized_corpus = [doc.split(" ") for doc in future_corpus]
         bm25 = BM25Okapi(tokenized_corpus)
 
-        # Узнаем релевантнтность в NumPy
-        # query = 'плитку'
+        # Даем оценку по NumPy
         tokenized_query = query.split(" ")
-        # print(tokenized_corpus)
-        doc_scores = bm25.get_scores(tokenized_query)
-        print(tokenized_corpus)
+        #doc_scores = bm25.get_scores(tokenized_query)
+
         # Узнаем по ключу релевантное предложение NumPy
         result = bm25.get_top_n(tokenized_query, future_corpus, n=1)
 

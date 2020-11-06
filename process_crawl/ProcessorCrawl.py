@@ -31,10 +31,10 @@ class CrawlRun(object):
                     pass
 
 
-def PoolCrawl(object_pars):
+def PoolCrawl(object_pars,n=5):
     try:
         M = CrawlRun(object_pars)
-        pool = Pool(5)
+        pool = Pool(n)
         pool.map(behavior, M.data())
     except:
         pass

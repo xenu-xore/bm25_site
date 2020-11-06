@@ -18,7 +18,7 @@ class PageText:
                 responses = req.content
                 page_text = BeautifulSoup(responses, 'html.parser')
                 result = page_text.get_text(strip=False)
-                result2 = result.split('\n')
+                result2 = result.split()
                 general = (i for i in result2)
                 for i in general:
                     if i != '':
@@ -45,6 +45,7 @@ class PageText:
         elif self.format_doc == 'txt':
             with codecs.open('format.txt', 'w', encoding='utf-8') as f:
                 c = Counter(generatorFunc())
+                print(c)
                 [f.write(str(k) + ' ' + str(v) + '\n') for k, v in c.items()]
                 print('Done txt')
 
@@ -60,3 +61,6 @@ class PageText:
 
         else:
             print('Unknown format')
+
+
+
