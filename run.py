@@ -5,7 +5,7 @@ HEADERS = {
     'accept': '*/*',
     'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 }
-URL = 'https://vc.ru/sitemap/standard.xml'
+URL = 'https://vc.ru/'
 SITEMAP = 'https://vc.ru/sitemap/standard.xml'
 
 
@@ -17,7 +17,7 @@ SITEMAP = 'https://vc.ru/sitemap/standard.xml'
 # Запустить процес подсчета слов
 def write_file():
     write = PageText('txt')
-    write.writeFile('https://dolgoletmed.ru/uslugi-i-tseny/')
+    write.writeFile('https://vc.ru/')
 
 
 # Определение логики
