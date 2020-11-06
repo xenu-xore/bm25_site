@@ -2,11 +2,13 @@ from count.CountWords import CountModel
 from textlib.Text import PageText
 from process_crawl.ProcessorCrawl import *
 
-
 HEADERS = {'accept': '*/*',
            'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
 URL = 'https://vc.ru/'
 SITEMAP = 'https://vc.ru/sitemap/standard.xml'
+
+SITEMAP2 = '/root/Загрузки/sitemap-model_reviews-000.xml'
+
 
 # run process crawling requests - data base is sitemap.xml PoolCrawl(URL, n=7)
 def behavior(request):
@@ -23,7 +25,7 @@ def write_file():
 # Defining logic
 if __name__ == "__main__":
     # For sitemap
-    #PoolCrawl(SITEMAP)
+    PoolCrawl(URL)
 
     # For counting and writing words
-    write_file()
+    # write_file()

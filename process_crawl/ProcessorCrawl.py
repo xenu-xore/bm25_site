@@ -1,7 +1,8 @@
+import os
 from multiprocessing import Pool
 import requests
 import bs4
-from run import behavior, HEADERS
+from run import behavior, HEADERS, SITEMAP2
 
 
 class CrawlRun(object):
@@ -10,24 +11,25 @@ class CrawlRun(object):
 
     def data(self):
         """Сбор URL из sitemap для дальнейшего обхода в behavior(data_urls)"""
-        try:
+        dir_url = os.path.exists(self.url)
+        if not dir_url:
             c = requests.get(self.url, allow_redirects=True, headers=HEADERS, timeout=5)
             if c.headers['Content-type'] == 'application/xml':
+
                 soup = bs4.BeautifulSoup(c.content, 'html.parser')
                 list_urls_s = [i.get_text() for i in soup.find_all('loc')]
                 return list_urls_s
             else:
                 return behavior(self.url)
-        except Exception as e:
-            return e
 
-        try:
+        elif dir_url:
+            print(self.url)
             with open(self.url, 'r') as f:
-                soup = bs4.BeautifulSoup(f, 'html.process_crawl')
+                soup = bs4.BeautifulSoup(f, 'html.parser')
                 list_urls_s = [i.get_text() for i in soup.find_all('loc')]
                 return list_urls_s
-        except Exception as e:
-            return e
+        else:
+            print('Not URL')
 
 
 def PoolCrawl(object_pars, n=5):
