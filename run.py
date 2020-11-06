@@ -5,9 +5,9 @@ HEADERS = {
     'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 }
 
-URL = 'https://kaffelkrasnodar.ru/'
+URL = 'https://vc.ru/sitemap/standard.xml'
 
-SITEMAP = 'https://kaffelkrasnodar.ru/sitemap-index.xml'
+SITEMAP = 'https://vc.ru/sitemap/standard.xml'
 
 
 def behavior(requests):
